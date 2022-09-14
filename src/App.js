@@ -54,6 +54,7 @@ function App() {
       .then(function (response) {
         // handle success
         console.log(response);
+        deleted = deleted +1
       })
       .catch(function (error) {
         // handle error
@@ -63,14 +64,14 @@ function App() {
         // always executed
       });
   };
-
+let deleted = 0;
   const submitHandler = (e) => {
     e.preventDefault();
     Axios.post("https://localhost:7075/api/Contacts", addContact)
       .then(function (response) {
         // handle success
         console.log(response);
-        setContacts([...contacts, addContact]);
+        setContacts([...contacts, response]);
       })
       .catch(function (error) {
         // handle error
@@ -95,7 +96,7 @@ function App() {
       .then(function () {
         // always executed, normally for redux things
       });
-  }, []);
+  }, [deleted]);
 
   return (
     <div className="App">
